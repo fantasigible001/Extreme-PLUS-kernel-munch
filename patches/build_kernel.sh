@@ -47,10 +47,10 @@ find . -type f \( -name "dtbo.img" -o -name "Image" -o -name "Image.gz" \) -dele
 # ------------------------------------------
 # 1. Custom Kernel Name Configuration
 # ------------------------------------------
-echo "[*] Setting Custom Kernel Name to -EXTREME++GAMING_Hyperos..."
+echo "[*] Setting Custom Kernel Name..."
 rm -f localversion*
-sed -i 's/^CONFIG_LOCALVERSION=.*/CONFIG_LOCALVERSION="-EXTREME++GAMING_Hyperos"/' "arch/arm64/configs/${DEFCONFIG}"
-grep -q "CONFIG_LOCALVERSION=" "arch/arm64/configs/${DEFCONFIG}" || echo 'CONFIG_LOCALVERSION="-EXTREME++GAMING_Hyperos"' >> "arch/arm64/configs/${DEFCONFIG}"
+sed -i 's/^CONFIG_LOCALVERSION=.*/CONFIG_LOCALVERSION="-hnmch"/' "arch/arm64/configs/${DEFCONFIG}"
+grep -q "CONFIG_LOCALVERSION=" "arch/arm64/configs/${DEFCONFIG}" || echo 'CONFIG_LOCALVERSION="-hnmch"' >> "arch/arm64/configs/${DEFCONFIG}"
 sed -i 's/^EXTRAVERSION =.*/EXTRAVERSION =/' Makefile
 
 # ZRAM ZSTD, EXTREME+ Governor & GPU Devfreq defconfig tunables
@@ -95,6 +95,7 @@ fi
 if [ "$ENABLE_KSU" -eq 1 ]; then
     echo "[*] Injecting ReSukiSU (Non-GKI 4.19 Legacy with SuSFS) Source..."
     curl -LSs "https://raw.githubusercontent.com/ReSukiSU/ReSukiSU/main/kernel/setup.sh" | bash
+	curl https://raw.githubusercontent.com/maxsteeel/nomount/refs/heads/dev/kernel/setup.sh | bash -
     
     # Ensure defconfig has KSU, SuSFS, and THREAD_INFO_IN_TASK
     echo "CONFIG_KSU=y" >> "arch/arm64/configs/${DEFCONFIG}"
