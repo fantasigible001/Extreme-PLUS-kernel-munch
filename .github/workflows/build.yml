@@ -114,3 +114,10 @@ jobs:
               -F document=@"$z" \
               -F caption="📦 $(basename "$z")" || true
           done
+
+      - name: Upload Flashable ZIP
+        uses: actions/upload-artifact@v7
+        with:
+          name: HNMCH
+          path: HNMCH.zip
+          compression-level: 0
